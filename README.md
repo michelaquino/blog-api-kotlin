@@ -15,7 +15,7 @@ A simple blog post API to learning Kotlin
 
 [ ] Incluir Post
 
-[ ] Listar Posts
+[x] Listar Posts
 
 [ ] Excluir Post
 
@@ -25,11 +25,9 @@ A simple blog post API to learning Kotlin
 
 [ ] Utilizar Postgres para armazenamento
 
-[ ] Criar interfaces para os serviços
+[x] Criar interfaces para o repositorio
 
-[ ] Criar interfaces para o repositorio
-
-[ ] Utilizar injeção de dependência Koin
+[x] Utilizar injeção de dependência Koin
 
 [ ] Fazer os testes utilizando assertJ
 
@@ -38,3 +36,5 @@ A simple blog post API to learning Kotlin
 [ ] Geração de yml para swagger
 
 [ ] Handle para rotas
+
+[ ] Logs
