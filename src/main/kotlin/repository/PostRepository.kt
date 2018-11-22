@@ -1,13 +1,29 @@
 package repository
 
 import domain.Post
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class PostRepository : interfaces.PostRepository {
     override fun readAll(): List<Post> {
-        return arrayListOf(
-                Post(id = 1, title = "Title 1", content = "Description 1"),
-                Post(id = 2, title = "Title 2", content = "Description 2"),
-                Post(id = 3, title = "Title 3", content = "Description 3")
-        )
+        var posts = listOf<Post>()
+
+        transaction {
+            posts = PostsTable
+                    .selectAll()
+                    .map { post ->
+                        Post(id = post[PostsTable.id], title = post[PostsTable.title], content = post[PostsTable.content])
+                    }
+
+        }
+
+        return posts
     }
+}
+
+object PostsTable : Table("posts") {
+    val id = integer("id")
+    val title = varchar("title", 500)
+    val content = text("content")
 }

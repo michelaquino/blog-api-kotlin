@@ -7,8 +7,9 @@ A simple blog post API to learning Kotlin
 - Kotlin
 - Koin (Injeção de dependência)
 - AssertJ (Testes)
-- Exposed (Acesso à dados)
 - Postgres
+- Exposed (Acesso à dados)
+- Hikari (gerencia pool de conexões)
 - Detekt (Static code analysis)
 
 ##### TODO

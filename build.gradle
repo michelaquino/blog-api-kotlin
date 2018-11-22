@@ -24,6 +24,7 @@ dependencies {
     compile "org.slf4j:slf4j-simple:1.7.25"
     compile "org.jetbrains.exposed:exposed:0.11.2"
     compile "org.koin:koin-core:1.0.2"
+    compile "org.postgresql:postgresql:42.2.2"
 
 //    testImplementation "org.koin:koin-test:$koin_version"
 }

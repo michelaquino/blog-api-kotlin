@@ -2,6 +2,7 @@ import controllers.PostController
 import interfaces.PostRepository
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder
+import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module.module
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext
@@ -10,8 +11,18 @@ import services.PostService
 
 object Application : KoinComponent {
     fun init() {
-        val postController: PostController by inject()
+        configureDependenciInjection()
+        configureDatabase()
 
+        val app = Javalin
+                .create()
+                .enableCorsForOrigin("*")
+                .start(8080)
+
+        configureRoutes(app)
+    }
+
+    private fun configureDependenciInjection() {
         val koinModules = module {
             single { repository.PostRepository() as PostRepository}
             single { PostService(get()) }
@@ -19,11 +30,10 @@ object Application : KoinComponent {
         }
 
         StandAloneContext.startKoin(listOf(koinModules))
+    }
 
-        val app = Javalin
-                .create()
-                .enableCorsForOrigin("*")
-                .start(8080)
+    private fun configureRoutes(app: Javalin) {
+        val postController: PostController by inject()
 
         app.get("/") {
             ctx -> ctx.result("Hello World")
@@ -35,5 +45,9 @@ object Application : KoinComponent {
 //            post(PostController::createPost)
             }
         }
+    }
+
+    private fun configureDatabase() {
+        Database.connect("jdbc:postgresql://localhost:5432/blogpost", "org.postgresql.Driver", "user",password = "password")
     }
 }
