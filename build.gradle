@@ -25,6 +25,8 @@ dependencies {
     compile "org.jetbrains.exposed:exposed:0.11.2"
     compile "org.koin:koin-core:1.0.2"
     compile "org.postgresql:postgresql:42.2.2"
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '3.2.0'
+
 
 //    testImplementation "org.koin:koin-test:$koin_version"
 }

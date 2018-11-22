@@ -22,9 +22,7 @@ A simple blog post API to learning Kotlin
 
 [ ] Alterar Post
 
-[ ] Incluir Comentário em um Post
-
-[ ] Utilizar Postgres para armazenamento
+[x] Utilizar Postgres para armazenamento
 
 [x] Criar interfaces para o repositorio
 

@@ -1,3 +1,4 @@
+import com.zaxxer.hikari.HikariConfig
 import controllers.PostController
 import interfaces.PostRepository
 import io.javalin.Javalin
@@ -8,6 +9,7 @@ import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext
 import org.koin.standalone.inject
 import services.PostService
+import com.zaxxer.hikari.HikariDataSource
 
 object Application : KoinComponent {
     fun init() {
@@ -48,6 +50,11 @@ object Application : KoinComponent {
     }
 
     private fun configureDatabase() {
-        Database.connect("jdbc:postgresql://localhost:5432/blogpost", "org.postgresql.Driver", "user",password = "password")
+        val dataSource = HikariDataSource()
+        dataSource.jdbcUrl = "jdbc:postgresql://localhost:5432/blogpost"
+        dataSource.username = "user"
+        dataSource.password = "password"
+
+        Database.connect(dataSource)
     }
 }
