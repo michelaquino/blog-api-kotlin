@@ -2,6 +2,7 @@ package repository
 
 import domain.Post
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -19,6 +20,15 @@ class PostRepository : interfaces.PostRepository {
         }
 
         return posts
+    }
+
+    override fun create(post: Post) {
+        transaction {
+            PostsTable.insert{
+                it[title] = post.title
+                it[content] = post.content
+            }
+        }
     }
 }
 

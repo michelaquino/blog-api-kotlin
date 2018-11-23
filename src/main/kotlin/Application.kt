@@ -1,4 +1,3 @@
-import com.zaxxer.hikari.HikariConfig
 import controllers.PostController
 import interfaces.PostRepository
 import io.javalin.Javalin
@@ -44,7 +43,7 @@ object Application : KoinComponent {
         app.routes {
             ApiBuilder.path("posts") {
                 ApiBuilder.get { context -> postController.getPosts(context) }
-//            post(PostController::createPost)
+                ApiBuilder.post { context -> postController.createPost(context) }
             }
         }
     }
